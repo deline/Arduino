@@ -1,15 +1,16 @@
 #include "LocalLibrary.h"
 
-void blink(uint8_t pin, uint8_t times, uint16_t ms) {
-    for (uint8_t i=1; i<=5; i++) {
-      digitalWrite(i, HIGH);
-      
+void blink(int ledPins[], int arraySize) {
+    int delayTime = 200;
+
+    for (int i = 0; i < arraySize; i++) {
+        int previousIndex = i - 1;
+        if (previousIndex < 0) {
+            previousIndex = arraySize - 1;
+        }        
+        
+        digitalWrite(ledPins[i], HIGH);
+        digitalWrite(ledPins[previousIndex], LOW);
+        delay(delayTime);
     }
-    delay(100);
-    
-    for (uint8_t i=1; i<=5; i++) {
-        digitalWrite(i, LOW);
-    
-    }
-    delay(200);
 }
